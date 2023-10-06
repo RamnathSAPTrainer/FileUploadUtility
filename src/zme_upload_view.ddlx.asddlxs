@@ -1,0 +1,72 @@
+@Metadata.layer: #CORE
+
+@UI:{ 
+
+    headerInfo:{ 
+                    typeName: 'MDG - File Upload',
+                    typeNamePlural: 'MDG - File Upload List',
+                    title:{ type: #STANDARD, value: 'crNumber' },
+                    description:{  type: #STANDARD, value: 'crNumber' }
+                },
+    presentationVariant: [{
+                            sortOrder: [{ by: 'crNumber', direction: #ASC }],
+                            visualizations: [{type: #AS_LINEITEM}] 
+                         }] 
+                         
+}
+
+annotate entity ZC_UPLOAD_VIEW
+    with 
+{
+
+@UI.facet: [
+                { 
+                
+                    label: 'MDG Mass Upload Utility',
+                    id: 'generalInfo',
+                    type: #COLLECTION,
+                    position: 10
+                },
+                {
+                    id: 'crDetail',
+                    label: 'CR Details',
+                    type: #IDENTIFICATION_REFERENCE,
+                    parentId: 'generalInfo',
+                    targetQualifier: 'Crdetails',
+                    position: 10
+                },
+                {
+                    id: 'fileDetail',
+                    label: 'Attachment Details',
+                    type: #IDENTIFICATION_REFERENCE,
+                    parentId: 'generalInfo',
+                    targetQualifier: 'Upload',
+                    position: 30
+                }                
+]
+
+@UI.lineItem: [{ position: 10, importance: #HIGH, label: 'Change Request ID' } ]
+@UI.identification: [{ position: 10, label: 'Change Request ID', qualifier: 'Crdetails' } ]
+ crNumber;
+
+@UI.lineItem: [{ position: 20, label: 'Business Process' } ]
+@UI.identification: [{ position: 20, label: 'Business Process', qualifier: 'Crdetails' } ]
+ busiProcess;
+ 
+@UI.lineItem: [{ position: 30, label: 'Comments' } ]
+@UI.identification: [{ position: 30, label: 'Comments', qualifier: 'Crdetails'  } ] 
+ comments;
+ 
+@UI.identification: [{ position: 80, label: 'Attachment', qualifier: 'Upload' }] 
+ attachment;
+
+@UI.hidden: true 
+MimeType;
+
+@UI.identification: [{ position: 80, label: 'File Name', qualifier: 'Upload' }]
+ FileName;
+
+@UI.hidden: true
+ localCreatedat;
+    
+}

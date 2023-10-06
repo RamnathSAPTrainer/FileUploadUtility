@@ -1,0 +1,47 @@
+managed implementation in class zbp_i_upload_view unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZI_UPLOAD_VIEW alias uploadView
+persistent table ztab_upload_0857
+draft table ztab_draft_0857
+lock master
+total etag localCreatedat
+authorization master ( global )
+etag master createdAt
+{
+
+ field ( numbering : managed, readonly ) crNumber;
+ field( readonly ) localCreatedat, localCreatedby, createdAt, createdBy;
+
+ create;
+ update;
+ delete;
+
+ draft action Edit;
+ draft action Activate;
+ draft action Discard;
+ draft action Resume;
+ draft determine action Prepare;
+
+mapping for ztab_upload_0857
+ {
+
+crNumber = crnumber;
+comments = comments;
+
+attachment = attachment;
+mimeType = mimetype;
+fileName = filename;
+busiProcess = busi_process;
+
+localCreatedat = local_createdat;
+localCreatedby = local_createdby;
+
+createdAt = created_at;
+createdBy = created_by;
+	
+}
+
+
+}

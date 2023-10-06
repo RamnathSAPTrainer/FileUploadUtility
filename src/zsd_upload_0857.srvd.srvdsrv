@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Defenition for File Upload'
+define service ZSD_UPLOAD_0857 {
+  expose ZC_UPLOAD_VIEW;
+}
